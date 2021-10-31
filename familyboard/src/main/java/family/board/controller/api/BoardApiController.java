@@ -6,7 +6,12 @@ import family.board.model.network.request.BoardApiRequest;
 import family.board.model.network.response.BoardApiResponse;
 import family.board.service.BoardApiLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/board")
@@ -36,5 +41,9 @@ public class BoardApiController implements CrudInterface<BoardApiRequest, BoardA
     @DeleteMapping("{id}")
     public Header delete(@PathVariable Integer id) {
         return boardApiLogicService.delete(id);
+    }
+    @GetMapping("")
+    public Header<List<BoardApiResponse>> search(@PageableDefault(sort = "id",direction = Sort.Direction.ASC,size = 15) Pageable pageable){
+        return boardApiLogicService.search(pageable);
     }
 }

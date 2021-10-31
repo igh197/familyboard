@@ -8,18 +8,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberApiLogicService implements UserDetailsService {
     @Autowired
     private MemberRepository memberRepository;
     @Transactional
-    public void joinUser(Member member){
+    public Member joinUser(Member member){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         member.setPassword(passwordEncoder.encode(member.getPassword()));
         memberRepository.save(member);
+        return member;
     }
     public Member loadMemberById(Integer id){
         Member member = memberRepository.findMemberById(id);

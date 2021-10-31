@@ -7,19 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/member")
 public class MemberApiController{
     @Autowired
     private MemberApiLogicService memberApiLogicService;
     @Autowired
     private MemberRepository memberRepository;
-    @PostMapping("create")
-    public String create(@RequestBody Member member){
-        memberApiLogicService.joinUser(member);
-        return "redirect:/login";
+    @PostMapping("/create")
+    public Member create(@RequestBody Member member) {
+        return memberApiLogicService.joinUser(member);
     }
 
-    @GetMapping("member/{id}")
+    @GetMapping("{id}")
     public Member memberAccess(@PathVariable Integer id){
         return memberApiLogicService.loadMemberById(id);
     }
