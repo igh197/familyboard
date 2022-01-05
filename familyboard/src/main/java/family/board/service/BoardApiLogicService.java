@@ -78,7 +78,7 @@ public class BoardApiLogicService implements CrudInterface<BoardApiRequest, Boar
     }
 
     @Override
-    public Header update(Header<BoardApiRequest> request) {
+    public Header<BoardApiResponse> update(Header<BoardApiRequest> request) {
         BoardApiRequest boardApiRequest = request.getData();
         Optional<Board> optional = boardRepository.findById(boardApiRequest.getId());
         return optional.map(board -> {
