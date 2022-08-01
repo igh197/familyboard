@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1">
-    <title>familyboard</title>
+    <meta charset="UTF-8">
+    <title>sign up</title>
 </head>
 <body>
-<div id=app>
-    <form action="http://localhost:8080/api/member/create" method="post">
-        이름 : <input type="text" name="name"><br>
-        역할 : <input type="text" name="role"><br>
-        아이디 : <input type="text" name="account"><br>
-        비밀번호 : <input type="password" name="password"><br>
-        이메일 : <input type="email" name="email"><br>
-        <input type="submit" value="submit">
-    </form>
-</div>
-</body></html>
+<h1>Sign Up</h1> <hr>
+
+<form action="/api/member/signup" method="POST">
+    account : <input type="text" name="account"> <br>
+    name : <input type="text" name="name"> <br>
+    email : <input type="text" name="email"> <br>
+    password : <input type="password" name="password"> <br>
+    <input type="radio" name="auth" value="ROLE_ADMIN,ROLE_USER"> admin
+    <input type="radio" name="auth" value="ROLE_USER" checked="checked"> user <br>
+    <button type="submit">Join</button>
+</form> <br>
+
+<a href="/login.html">Go to login →</a>
+</body>
+</html>

@@ -1,16 +1,14 @@
 package family.board.model.entity;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.sql.Blob;
-import java.time.LocalDateTime;
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Data
 @Builder
@@ -19,21 +17,16 @@ import java.time.LocalDateTime;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String title;
 
     private String content;
 
     private Blob file;
-    @CreatedDate
-    private LocalDateTime createdAt;
-    @CreatedBy
-    private String createdBy;
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-    @LastModifiedBy
-    private String updatedBy;
+
     @ManyToOne
+    @JsonProperty("member_id")
     private Member member;
+
 }

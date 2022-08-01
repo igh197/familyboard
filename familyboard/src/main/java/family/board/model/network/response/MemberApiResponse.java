@@ -11,13 +11,15 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Builder
 @Accessors(chain = true)
-public class MemberApiResponse {
+public class MemberApiResponse{
 
-    private Integer id;
+    private Long id;
     private String name;
     private String account;
-
+    private String auth;
     private String password;
 
     private String email;
+
+
 }

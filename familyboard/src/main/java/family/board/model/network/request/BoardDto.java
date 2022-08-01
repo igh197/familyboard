@@ -1,19 +1,17 @@
-package family.board.model.network.response;
+package family.board.model.network.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.sql.Blob;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@ToString
 @Accessors(chain = true)
-public class BoardApiResponse {
+public class BoardDto {
     private Long id;
 
     private String title;
@@ -21,7 +19,6 @@ public class BoardApiResponse {
     private String content;
 
     private Blob file;
-
 
 
 }

@@ -4,7 +4,7 @@ import family.board.model.network.Header;
 
 public interface CrudInterface<Req,Res> {
     Header<Res> create(Header<Req> request); //추후
-    Header<Res> read(Integer id);
+    Header<Res> read(Long id);
     Header<Res> update(Header<Req> request);
-    Header delete(Integer id);
+    Header delete(Long id);
 }

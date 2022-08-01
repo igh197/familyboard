@@ -12,11 +12,13 @@ import lombok.experimental.Accessors;
 @Builder
 @Accessors(chain = true)
 public class MemberApiRequest {
-    private Integer id;
+    private Long id;
     private String name;
+    private String auth;
     private String account;
-    private String role;
     private String password;
 
     private String email;
+
+
 }
