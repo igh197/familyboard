@@ -36,7 +36,7 @@ public class Member implements UserDetails {
 
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "member")
+    @OneToMany
     private List<Board> BoardList;
 
 

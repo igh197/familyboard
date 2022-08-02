@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.sql.Blob;
+import java.io.File;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +20,7 @@ public class BoardApiResponse {
 
     private String content;
 
-    private Blob file;
+    private File file;
 
 
 

@@ -6,8 +6,7 @@ import family.board.model.network.Header;
 import family.board.model.network.Pagination;
 import family.board.model.network.response.BoardApiResponse;
 import family.board.repository.BoardRepository;
-import family.board.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,14 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+@RequiredArgsConstructor
 @Service
 public class BoardApiLogicService implements CrudInterface<Board, BoardApiResponse> {
-    @Autowired
-    private BoardRepository boardRepository;
 
-    @Autowired
-    private MemberRepository memberRepository;
+    private final BoardRepository boardRepository;
 
     public Header<List<BoardApiResponse>> search(Pageable pageable) {
         Page<Board> boards = boardRepository.findAll(pageable);
@@ -36,22 +32,22 @@ public class BoardApiLogicService implements CrudInterface<Board, BoardApiRespon
         return Header.OK(boardApiResponseList,pagination);
     }
 
-    @Override
-    public Header<BoardApiResponse> create(Header<Board> request) {
 
-        Board board = request.getData();
-        Board newBoard = Board.builder()
-                .id(board.getId())
-                .title(board.getTitle())
-                .content(board.getContent())
-                .file(board.getFile())
-                .build();
-        return Header.OK(response(newBoard));
+
+    @Override
+    public Header<BoardApiResponse> save(Header<Board> request) {
+        Board board =request.getData();
+        Board board1 = new Board();
+                board1.setId(board.getId());
+                board1.setTitle(board.getTitle());
+                board1.setContent(board.getContent());
+                board1.setFile(board.getFile());
+
+        return Header.OK(response(boardRepository.save(board1)));
     }
 
     private BoardApiResponse response(Board board) {
         BoardApiResponse boardApiResponse = BoardApiResponse.builder()
-                .id(board.getId())
                 .title(board.getTitle())
                 .content(board.getContent())
                 .file(board.getFile())

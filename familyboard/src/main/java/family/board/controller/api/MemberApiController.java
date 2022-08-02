@@ -1,23 +1,18 @@
 package family.board.controller.api;
 
 import family.board.model.network.request.MemberApiRequest;
-import family.board.repository.MemberRepository;
-import family.board.service.BoardApiLogicService;
 import family.board.service.MemberApiLogicService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/member")
 public class MemberApiController {
-    @Autowired
-    private BoardApiLogicService boardApiLogicService;
-    @Autowired
-    private MemberApiLogicService memberApiLogicService;
-    @Autowired
-    private MemberRepository memberRepository;
+    private final MemberApiLogicService memberApiLogicService;
+
 
     @PostMapping(value = "/signup")
     public String signup(MemberApiRequest memberApiRequest) {

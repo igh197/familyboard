@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html >
 <head>
     <meta charset="UTF-8">
-    <meta name="_csrf" th:content="${_csrf.token}">
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <title>게시물 작성</title>
 </head>
 <body>
-<form action="/api/board/create" method="POST">
-    title: <input type="text" name="title"> <br>
-    content: <textarea name="content"></textarea><br>
-    file: <input type="file"><br>
+<form action="api/board/save" method="POST">
+    title: <label>
+    <input type="text" name="title">
+</label> <br>
+    content: <label>
+    <textarea name="content"></textarea>
+</label><br>
+    file: <input type="file" name="file"><br>
     <button type="submit">register</button>
 </form> <br>
 </body>

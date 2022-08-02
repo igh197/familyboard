@@ -5,7 +5,7 @@ import family.board.model.entity.Board;
 import family.board.model.network.Header;
 import family.board.model.network.response.BoardApiResponse;
 import family.board.service.BoardApiLogicService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/board")
+@RequestMapping("api/board")
 public class BoardApiController implements CrudInterface<Board, BoardApiResponse> {
-    @Autowired
-    private BoardApiLogicService boardApiLogicService;
+    private final BoardApiLogicService boardApiLogicService;
 
     @Override
-    @PostMapping("/create")
-    public Header<BoardApiResponse> create(@ModelAttribute Header<Board> request) {
-        return boardApiLogicService.create(request);
+    @PostMapping("/save")
+    public Header<BoardApiResponse> save(Header<Board> request) {
+        return boardApiLogicService.save(request);
     }
 
     @Override
@@ -32,13 +32,13 @@ public class BoardApiController implements CrudInterface<Board, BoardApiResponse
     }
 
     @Override
-    @PutMapping("")
+    @PutMapping("/")
     public Header<BoardApiResponse> update(@ModelAttribute Header<Board> request) {
         return boardApiLogicService.update(request);
     }
 
     @Override
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public Header delete(@PathVariable Long id) {
         return boardApiLogicService.delete(id);
     }

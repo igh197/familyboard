@@ -1,22 +1,28 @@
 package family.board.config;
 
 import family.board.service.MemberApiLogicService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+@EnableWebSecurity
+@RequiredArgsConstructor
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    MemberApiLogicService memberApiLogicService;
+
+    private final MemberApiLogicService memberApiLogicService;
 
 
+    @Override
+    public void configure(WebSecurity web) { // 4
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
+    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(memberApiLogicService).passwordEncoder(new BCryptPasswordEncoder());
@@ -28,9 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                  // 6
         http.csrf().disable()
                 .authorizeRequests() // 6
-                .antMatchers("/login.html","/signup.html","/api/board").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/board/create").permitAll()
-                .antMatchers("/create.html").permitAll()
+                .antMatchers("/api/board/**","/login.html","/signup.html","api/board").permitAll()
+                .antMatchers("/create.html").hasRole("USER")
                 .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
                 .and()
                 .formLogin() // 7

@@ -3,19 +3,20 @@ package family.board.service;
 import family.board.model.entity.Member;
 import family.board.model.network.request.MemberApiRequest;
 import family.board.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class MemberApiLogicService implements UserDetailsService {
-    @Autowired
-    MemberRepository memberRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
+    private final MemberRepository memberRepository;
+
+    PasswordEncoder passwordEncoder;
 
 
 
