@@ -1,14 +1,21 @@
 package com.example.familyboard.model.network.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
-@Data
-@AllArgsConstructor
+@Builder
+@Accessors(chain = true)
 @NoArgsConstructor
 public class BoardResponse {
-    private String title;
+    public String title;
 
-    private String content;
+    public String content;
+
+    public BoardResponse(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }

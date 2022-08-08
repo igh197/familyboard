@@ -32,7 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 6
         http.csrf().disable()
                 .authorizeRequests() // 6
-                .antMatchers("/api/board/**","/login.html").permitAll()
+                .antMatchers("/api/board","/login.html").permitAll()
+                .antMatchers(HttpMethod.PATCH,"/api/board/update").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/board/create").hasRole("USER")
                 .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
                 .and()
